@@ -1,0 +1,12 @@
+services:
+  frontend:
+    build: ./sostool-frontend
+    volumes:
+      - ./sostool-frontend/src:/frontend/src
+    network_mode: 'host'
+    command: [ "ng", "serve" ]
+
+  backend:
+    build: ./sostool-backend
+    network_mode: 'host'
+    command: [ "java", "-jar", "target/sostool-backend-0.0.1-SNAPSHOT.jar" ]
