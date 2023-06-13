@@ -3,10 +3,10 @@ services:
     build: ./sostool-frontend
     volumes:
       - ./sostool-frontend/src:/frontend/src
-    network_mode: 'host'
-    command: [ "ng", "serve" ]
+    ports:
+      - 4200:4200
 
   backend:
     build: ./sostool-backend
-    network_mode: 'host'
-    command: [ "java", "-jar", "target/sostool-backend-0.0.1-SNAPSHOT.jar" ]
+    ports:
+      - 8081:8081
