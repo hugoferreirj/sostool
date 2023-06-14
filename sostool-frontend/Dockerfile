@@ -10,4 +10,4 @@ EXPOSE 4200
 RUN npm i
 RUN npm install -g @angular/cli
 
-CMD [ "ng", "serve" ]
+CMD [ "ng", "serve", "--port", "4200", "--host", "0.0.0.0" ]
