@@ -61,7 +61,7 @@ class UserServiceImplTest {
 
     @Test
     void createUserNameWithMoreThan60Characters() {
-        AppUser user = new AppUser("hafufhfaduhhfdufdshfdshudfuhfauasfsafhafufhfaduhhfdufdshfdsht", 
+        AppUser user = new AppUser("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aen", 
         "lu@gmail.com", "");
 
         assertThrows(ConstraintViolationException.class, () -> {userService.createUser(user);}, 
@@ -71,7 +71,7 @@ class UserServiceImplTest {
     @Test
     void createUserEmailWithMoreThan70Characters() {
         AppUser user = new AppUser("Mariana", 
-        "hafufhfaduhhfdufdshfdshudfuhfauasfsafhafufhfaduhhfdufdshfdshtaaaaaaaaaa", "");
+        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commod", "");
 
        assertThrows(ConstraintViolationException.class, () -> {userService.createUser(user);}, 
        "Email with more than 70 characters accepted");
