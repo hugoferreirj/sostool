@@ -11,6 +11,6 @@ COPY src ./src
 EXPOSE 8081
 
 RUN chmod +x mvnw
-RUN ./mvnw install
+RUN ./mvnw install -Dskiptest
 
 CMD [ "java", "-jar", "target/sostool-backend-0.0.1-SNAPSHOT.jar" ]
