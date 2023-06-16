@@ -42,11 +42,56 @@ class UserServiceImplTest {
     }
 
     @Test
-    void createUser() {
-        AppUser user = new AppUser("aaaa", "email@email.com", "");
+    void createCorrectUser() {
+        AppUser user = new AppUser("Hugo", "hugo@usp.br", "");
 
         AppUser returnedUser = userService.createUser(user);
 
-        assertEquals(user, returnedUser, "The returned user was not expected");
+        assertEquals(user, returnedUser, "Correct user wasn't accepted");
+    }
+
+    @Test
+    void createUserNameWithLessThan3Characters() {
+        AppUser user = new AppUser("Lu", "lu@gmail.com", "");
+
+        AppUser returnedUser = userService.createUser(user);
+
+        assertNotEquals(user, returnedUser, "Name with less than 3 characters accepted");
+    }
+
+    @Test
+    void createUserNameWithMoreThan60Characters() {
+        AppUser user = new AppUser("hafufhfaduhhfdufdshfdshudfuhfauasfsafhafufhfaduhhfdufdshfdsht", "lu@gmail.com", "");
+
+        AppUser returnedUser = userService.createUser(user);
+
+        assertNotEquals(user, returnedUser, "Name with more than 60 characters accepted");
+    }
+
+    @Test
+    void createUserEmailWithMoreThan70Characters() {
+        AppUser user = new AppUser("Mariana", "hafufhfaduhhfdufdshfdshudfuhfauasfsafhafufhfaduhhfdufdshfdshtaaaaaaaaaa", "");
+
+        AppUser returnedUser = userService.createUser(user);
+
+        assertNotEquals(user, returnedUser, "Email with more than 70 characters accepted");
+    }
+
+    @Test
+    void createUserEmailEmpty() {
+        AppUser user = new AppUser("Mariana", "", "");
+
+        AppUser returnedUser = userService.createUser(user);
+
+        assertNotEquals(user, returnedUser, "Email empty field accepted");
+    }
+
+    @Test
+    void createUserNameEmpty() {
+        AppUser user = new AppUser("", "mariana@gmail.com", "");
+
+        AppUser returnedUser = userService.createUser(user);
+
+        assertNotEquals(user, returnedUser, "Name empty field accepted");
     }
 }
