@@ -16,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.*;
+import javax.validation.ConstraintViolationException;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -54,44 +55,41 @@ class UserServiceImplTest {
     void createUserNameWithLessThan3Characters() {
         AppUser user = new AppUser("Lu", "lu@gmail.com", "");
 
-        AppUser returnedUser = userService.createUser(user);
-
-        assertNotEquals(user, returnedUser, "Name with less than 3 characters accepted");
+        assertThrows(ConstraintViolationException.class, () -> {userService.createUser(user);}, 
+        "Name with less than 3 characters accepted");
     }
 
     @Test
     void createUserNameWithMoreThan60Characters() {
-        AppUser user = new AppUser("hafufhfaduhhfdufdshfdshudfuhfauasfsafhafufhfaduhhfdufdshfdsht", "lu@gmail.com", "");
+        AppUser user = new AppUser("hafufhfaduhhfdufdshfdshudfuhfauasfsafhafufhfaduhhfdufdshfdsht", 
+        "lu@gmail.com", "");
 
-        AppUser returnedUser = userService.createUser(user);
-
-        assertNotEquals(user, returnedUser, "Name with more than 60 characters accepted");
+        assertThrows(ConstraintViolationException.class, () -> {userService.createUser(user);}, 
+        "Name with more than 60 characters accepted");
     }
 
     @Test
     void createUserEmailWithMoreThan70Characters() {
-        AppUser user = new AppUser("Mariana", "hafufhfaduhhfdufdshfdshudfuhfauasfsafhafufhfaduhhfdufdshfdshtaaaaaaaaaa", "");
+        AppUser user = new AppUser("Mariana", 
+        "hafufhfaduhhfdufdshfdshudfuhfauasfsafhafufhfaduhhfdufdshfdshtaaaaaaaaaa", "");
 
-        AppUser returnedUser = userService.createUser(user);
-
-        assertNotEquals(user, returnedUser, "Email with more than 70 characters accepted");
+       assertThrows(ConstraintViolationException.class, () -> {userService.createUser(user);}, 
+       "Email with more than 70 characters accepted");
     }
 
     @Test
     void createUserEmailEmpty() {
         AppUser user = new AppUser("Mariana", "", "");
 
-        AppUser returnedUser = userService.createUser(user);
-
-        assertNotEquals(user, returnedUser, "Email empty field accepted");
+        assertThrows(ConstraintViolationException.class, () -> {userService.createUser(user);}, 
+        "Email empty field accepted");
     }
 
     @Test
     void createUserNameEmpty() {
         AppUser user = new AppUser("", "mariana@gmail.com", "");
 
-        AppUser returnedUser = userService.createUser(user);
-
-        assertNotEquals(user, returnedUser, "Name empty field accepted");
+        assertThrows(ConstraintViolationException.class, () -> {userService.createUser(user);}, 
+        "Name empty field accepted");
     }
 }
