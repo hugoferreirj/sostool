@@ -1,5 +1,6 @@
 services:
   frontend:
+    container_name: frontend_dc
     build: ./sostool-frontend
     volumes:
       - ./sostool-frontend/src:/frontend/src
@@ -7,6 +8,7 @@ services:
       - 127.0.0.1:4200:4200
 
   backend:
+    container_name: backend_dc
     build: ./sostool-backend
     ports:
       - 127.0.0.1:8081:8081
