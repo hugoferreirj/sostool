@@ -20,4 +20,4 @@ jobs:
           frontend
           backend
     - name: Test
-      run: docker exec -it backend_dc ./mvnw test
+      run: docker exec backend_dc ./mvnw test
