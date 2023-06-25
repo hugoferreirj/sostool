@@ -86,6 +86,15 @@ class UserServiceImplTest {
     }
 
     @Test
+    void createUserEmailInvalid() {
+        AppUser user = new AppUser("Mariana", "mari", "");
+
+        assertThrows(ConstraintViolationException.class, () -> {userService.createUser(user);}, 
+        "Email invalid accepted");
+    }
+
+
+    @Test
     void createUserNameEmpty() {
         AppUser user = new AppUser("", "mariana@gmail.com", "");
 

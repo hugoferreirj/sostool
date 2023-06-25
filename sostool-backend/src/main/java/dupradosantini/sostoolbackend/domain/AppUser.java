@@ -9,6 +9,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Email;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -30,6 +31,7 @@ public class AppUser implements Serializable {
 
     @Column(unique = true)
     @NotEmpty(message = "Campo email é obrigatório")
+    @Email(message = "Campo email deve ser no formato email@domain")
     @Length(max = 70, message = "O email deve ter no máximo 30 caracteres")
     private String email;
 
